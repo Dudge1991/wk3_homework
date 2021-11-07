@@ -46,7 +46,7 @@ myFunctions = {
   },
 
   removePetByName(object, petName){
-    for(var i = object.pets.length-1; i >= 0; i--){
+    for(let i = object.pets.length-1; i >= 0; i--){
       if (object.pets[i].name === petName){
          object.pets.splice(i, 1);
       }
@@ -80,6 +80,32 @@ myFunctions = {
   addPetToCustomer(person, pet){
     person.pets.push(pet);
   },
+
+  customerCanAffordPet(person, pet){
+    if (person.cash >= pet.price){
+      return true;
+    }
+    else {
+      return false;
+    }
+  },
+
+  sellPetToCustomer(object, petName, person){
+    
+    for(let i = object.pets.length-1; i >= 0; i--){
+      if (object.pets[i] === petName && myFunctions.customerCanAffordPet(person, petName) === true){
+        person.pets.push(petName);
+        myFunctions.increasePetsSold(object, 1);
+        myFunctions.removeCustomerCash(person, petName.price);
+        myFunctions.addOrRemoveCash(object, petName.price);
+        myFunctions.removePetByName(object, petName.name);
+      }
+    }
+  },
+
+
+
+
   // Write your functions here
 };
 
