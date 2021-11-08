@@ -91,9 +91,8 @@ myFunctions = {
   },
 
   sellPetToCustomer(object, petName, person){
-    
-    for(let i = object.pets.length-1; i >= 0; i--){
-      if (object.pets[i] === petName && myFunctions.customerCanAffordPet(person, petName) === true){
+    for(let pet of object.pets){
+      if (pet === petName && myFunctions.customerCanAffordPet(person, petName) === true){
         person.pets.push(petName);
         myFunctions.increasePetsSold(object, 1);
         myFunctions.removeCustomerCash(person, petName.price);
